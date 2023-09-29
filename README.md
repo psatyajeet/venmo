@@ -26,3 +26,6 @@ pipenv run python3 request.py [name] [dollar amount] [description] request
 ```
 pipenv run python3 request.py [name] [dollar amount] [description] send
 ```
+
+## Not enough balance
+Sometimes you won't have enough balance in your account to send money. You'll have to set your `FUNDING_SOURCE_ID` in the `.env` file. You can find the funding source using the `get_payment_methods()` method. The id is a string of numbers

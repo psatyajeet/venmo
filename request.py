@@ -47,24 +47,26 @@ def request_money(username, amount, description):
   return result
 
 def get_payment_methods():
-  payment_methods = venmo.payment.get_payment_methods()
-  for payment_method in payment_methods:
-    print(payment_method.to_json())
-    
+    payment_methods = venmo.payment.get_payment_methods()
+    for payment_method in payment_methods:
+        print(payment_method.to_json())
+
 if __name__ == "__main__":
-  names = sys.argv[1].split(',')
-  amount = float(sys.argv[2])
-  description = sys.argv[3]
-  sendOrReceive = sys.argv[4]
+    names = sys.argv[1].split(",")
+    amount = float(sys.argv[2])
+    description = sys.argv[3]
+    sendOrRequest = sys.argv[4]
 
-  for name in names:
-    if name not in name_to_username and not get_user_id(name_to_username[name]):
-      raise Exception("Unknown name: {}".format(name))
+    for name in names:
+        if name not in name_to_username and not get_user_id(name_to_username[name]):
+            raise Exception("Unknown name: {}".format(name))
 
-  for name in names:
-    if sendOrReceive == "send":
-      send_money(name_to_username[name], amount, description)
-    elif sendOrReceive == "request":
-      request_money(name_to_username[name], amount, description)
-    else: 
-      raise Exception(f"Unknown sendOrReceive: {sendOrReceive}")
+    for name in names:
+        if sendOrRequest == "send":
+            send_money(name_to_username[name], amount, description)
+        elif sendOrRequest == "request":
+            request_money(name_to_username[name], amount, description)
+        else:
+            raise Exception(
+                f"Unknown sendOrRequest: {sendOrRequest}. Should be 'send' or 'request'."
+            )
